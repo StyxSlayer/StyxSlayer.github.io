@@ -92,22 +92,29 @@ function convertToJSON(elem) {
 }
 
 function csvToJSON(csvData) {
-    const lines = csvData.split('\n');
-    const headers = lines[0].split(',');
-    const jsonArray = [];
+  const lines = csvData.split('\n');
+  const headers = lines[0].split(',');
+  const jsonArray = [];
 
-    for (let i = 1; i < lines.length; i++) {
-        const currentLine = lines[i].split(',');
-        const jsonObject = {};
+  for (let i = 1; i < lines.length; i++) {
+    const currentLine = lines[i].split(',');
 
-        for (let j = 0; j < headers.length; j++) {
-            jsonObject[headers[j].trim()] = currentLine[j].trim();
-        }
-
-        jsonArray.push(jsonObject);
+    // Skip empty lines
+    if (currentLine.length === 1 && currentLine[0] === '') {
+      continue;
     }
 
-    return jsonArray;
+    const jsonObject = {};
+
+    for (let j = 0; j < headers.length; j++) {
+      const value = j < currentLine.length ? currentLine[j].trim() : '';
+      jsonObject[headers[j].trim()] = value;
+    }
+
+    jsonArray.push(jsonObject);
+  }
+
+  return jsonArray;
 }
 
 function cleanCNData(data) {
