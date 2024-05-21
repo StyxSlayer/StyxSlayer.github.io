@@ -121,7 +121,7 @@ function cleanCNData(data) {
     let output = [];
     for (let i = 0; i < data.length; i++) {
         if (isNaN(data[i].quantity)) {
-            window.alert("Row " + i + "\'s quantity is not a number");
+            console.log("Row " + i + "\'s quantity is not a number");
         }
         let index = findIndexOf(output, data[i].item);
         if (index != -1) {
@@ -145,7 +145,7 @@ function cleanUSData(data) {
     for (let i = 0; i < data.length; i++) {
         let itemName = data[i].item.toString();
         if (isNaN(data[i].quantity)) {
-            window.alert("Row " + i + "\'s quantity is not a number");
+            console.log("CN Row " + i + "\'s quantity is not a number");
         }
         data[i].quantity = parseFloat(data[i].quantity);
 
